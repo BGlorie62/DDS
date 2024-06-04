@@ -11,21 +11,10 @@
 #include "Memory.h"
 
 
-Memory::Memory()
-{
-}
-
-
-Memory::~Memory()
-{
-  Memory::Resize(0, DDS_TT_SMALL, 0, 0);
-}
-
-
 void Memory::ReturnThread(const unsigned thrId)
 {
-  memory[thrId]->transTable->ReturnAllMemory();
-  memory[thrId]->memUsed = Memory::MemoryInUseMB(thrId);
+  memory[thrId].transTable->ReturnAllMemory();
+  memory[thrId].memUsed = Memory::MemoryInUseMB(thrId);
 }
 
 
@@ -40,12 +29,6 @@ void Memory::Resize(
 
   if (memory.size() > n)
   {
-    // Downsize.
-    for (unsigned i = n; i < memory.size(); i++)
-    {
-      delete memory[i]->transTable;
-      delete memory[i];
-    }
     memory.resize(static_cast<unsigned>(n));
     threadSizes.resize(static_cast<unsigned>(n));
   }
@@ -57,22 +40,21 @@ void Memory::Resize(
     threadSizes.resize(n);
     for (unsigned i = oldSize; i < n; i++)
     {
-      memory[i] = new ThreadData();
       if (flag == DDS_TT_SMALL)
       {
-        memory[i]->transTable = new TransTableS;
+        memory[i].transTable.reset(new TransTableS);
         threadSizes[i] = "S";
       }
       else
       {
-        memory[i]->transTable = new TransTableL;
+        memory[i].transTable.reset(new TransTableL);
         threadSizes[i] = "L";
       }
 
-      memory[i]->transTable->SetMemoryDefault(memDefault_MB);
-      memory[i]->transTable->SetMemoryMaximum(memMaximum_MB);
+      memory[i].transTable->SetMemoryDefault(memDefault_MB);
+      memory[i].transTable->SetMemoryMaximum(memMaximum_MB);
 
-      memory[i]->transTable->MakeTT();
+      memory[i].transTable->MakeTT();
     }
   }
 }
@@ -91,13 +73,13 @@ ThreadData * Memory::GetPtr(const unsigned thrId)
     cout << "Memory::GetPtr: " << thrId << " vs. " << memory.size() << endl;
     exit(1);
   }
-  return memory[thrId];
+  return &memory[thrId];
 }
 
 
 double Memory::MemoryInUseMB(const unsigned thrId) const
 {
-  return memory[thrId]->transTable->MemoryInUse() +
+  return memory[thrId].transTable->MemoryInUse() +
     8192. * sizeof(relRanksType) / static_cast<double>(1024.);
 }
 

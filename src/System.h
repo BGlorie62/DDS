@@ -81,7 +81,7 @@ class System
   public:
     System();
 
-    ~System();
+    ~System() = default;
 
     void Reset();
 
