@@ -162,7 +162,7 @@ class Scheduler
 
     Scheduler();
 
-    ~Scheduler();
+    ~Scheduler() = default;
 
     void RegisterThreads(
       const int n);

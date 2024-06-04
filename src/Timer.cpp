@@ -24,11 +24,6 @@ Timer::Timer()
 }
 
 
-Timer::~Timer()
-{
-}
-
-
 void Timer::Reset()
 {
   name = "";

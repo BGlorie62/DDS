@@ -22,11 +22,6 @@ TimeStat::TimeStat()
 }
 
 
-TimeStat::~TimeStat()
-{
-}
-
-
 void TimeStat::Reset()
 {
   number = 0;

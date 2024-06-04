@@ -15,17 +15,6 @@
 #include "TimeStatList.h"
 
 
-TimeStatList::TimeStatList()
-{
-  TimeStatList::Reset();
-}
-
-
-TimeStatList::~TimeStatList()
-{
-}
-
-
 void TimeStatList::Reset()
 {
 }

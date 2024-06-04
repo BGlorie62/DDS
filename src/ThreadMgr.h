@@ -29,7 +29,7 @@ class ThreadMgr
 
     ThreadMgr();
 
-    ~ThreadMgr();
+    ~ThreadMgr() = default;
 
     void Reset(const int nThreads);
 

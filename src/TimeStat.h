@@ -27,7 +27,7 @@ class TimeStat
 
     TimeStat();
 
-    ~TimeStat();
+    ~TimeStat() = default;
 
     void Reset();
 

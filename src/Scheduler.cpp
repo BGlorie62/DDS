@@ -85,11 +85,6 @@ void Scheduler::InitTimes()
 #endif
 
 
-Scheduler::~Scheduler()
-{
-}
-
-
 void Scheduler::Reset()
 {
   for (int b = 0; b < MAXNOOFBOARDS; b++)

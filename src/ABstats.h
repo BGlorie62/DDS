@@ -106,7 +106,7 @@ class ABstats
 
     ABstats();
 
-    ~ABstats();
+    ~ABstats() = default;
 
     void Reset();
 

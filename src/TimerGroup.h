@@ -29,7 +29,7 @@ class TimerGroup
 
     TimerGroup();
 
-    ~TimerGroup();
+    ~TimerGroup() = default;
 
     void Reset();
 

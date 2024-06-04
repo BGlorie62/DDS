@@ -24,11 +24,6 @@ TimerList::TimerList()
 }
 
 
-TimerList::~TimerList()
-{
-}
-
-
 void TimerList::Reset()
 {
   timerGroups.resize(TIMER_NO_SIZE);
