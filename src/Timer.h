@@ -35,7 +35,7 @@ class Timer
 
     Timer();
 
-    ~Timer();
+    ~Timer() = default;
 
     void Reset();
 

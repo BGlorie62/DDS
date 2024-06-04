@@ -87,7 +87,7 @@ class TimerList
   public:
     TimerList();
 
-    ~TimerList();
+    ~TimerList() = default;
 
     void Reset();
 

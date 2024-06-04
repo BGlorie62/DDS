@@ -64,9 +64,9 @@ struct nodeCardsType // 8 bytes
 class TransTable
 {
   public:
-    TransTable(){};
+    TransTable() = default;
 
-    virtual ~TransTable(){};
+    virtual ~TransTable() = default;
 
     virtual void Init(const int handLookup[][15]){};
 

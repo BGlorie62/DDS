@@ -28,10 +28,6 @@ class TimeStatList
 
   public:
 
-    TimeStatList();
-
-    ~TimeStatList();
-
     void Reset();
 
     void Init(

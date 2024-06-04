@@ -176,7 +176,7 @@ class Moves
   public:
     Moves();
 
-    ~Moves();
+    ~Moves() = default;
 
     void Init(
       const int tricks,

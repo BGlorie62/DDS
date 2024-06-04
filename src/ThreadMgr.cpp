@@ -29,11 +29,6 @@ ThreadMgr::ThreadMgr()
 }
 
 
-ThreadMgr::~ThreadMgr()
-{
-}
-
-
 void ThreadMgr::Reset(const int nThreads)
 {
   const unsigned n = static_cast<unsigned>(nThreads);

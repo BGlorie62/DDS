@@ -83,11 +83,6 @@ System::System()
 }
 
 
-System::~System()
-{
-}
-
-
 void System::Reset()
 {
   runCat = DDS_RUN_SOLVE;
@@ -434,19 +429,16 @@ int System::RunThreadsGCD()
 int System::RunThreadsBoost()
 {
 #ifdef DDS_THREADS_BOOST
-  vector<boost::thread *> threads;
+  vector<boost::thread> threads;
 
   const unsigned nu = static_cast<unsigned>(numThreads);
-  threads.resize(nu);
+  threads.reserve(nu);
 
   for (unsigned k = 0; k < nu; k++)
-    threads[k] = new boost::thread(fptr, k);
+    threads.emplace_back(fptr, k);
 
-  for (unsigned k = 0; k < nu; k++)
-  {
-    threads[k]->join();
-    delete threads[k];
-  }
+  for (boost::thread & t : threads)
+    t.join();
 #endif
 
   return RETURN_NO_FAULT;
@@ -460,23 +452,20 @@ int System::RunThreadsBoost()
 int System::RunThreadsSTL()
 {
 #ifdef DDS_THREADS_STL
-  vector<thread *> threads;
+  vector<thread> threads;
 
   vector<int> uniques;
   vector<int> crossrefs;
   (* CallbackDuplList[runCat])(* bop, uniques, crossrefs);
 
   const unsigned nu = static_cast<unsigned>(numThreads);
-  threads.resize(nu);
+  threads.reserve(nu);
 
   for (unsigned k = 0; k < nu; k++)
-    threads[k] = new thread(fptr, k);
+    threads.emplace_back(fptr, k);
 
-  for (unsigned k = 0; k < nu; k++)
-  {
-    threads[k]->join();
-    delete threads[k];
-  }
+  for (thread & t : threads)
+    t.join();
 #endif
 
   return RETURN_NO_FAULT;
@@ -534,19 +523,16 @@ int System::RunThreadsSTLIMPL()
 int System::RunThreadsTBB()
 {
 #ifdef DDS_THREADS_TBB
-  vector<tbb::tbb_thread *> threads;
+  vector<tbb::tbb_thread> threads;
 
   const unsigned nu = static_cast<unsigned>(numThreads);
-  threads.resize(nu);
+  threads.reserve(nu);
 
   for (unsigned k = 0; k < nu; k++)
-    threads[k] = new tbb::tbb_thread(fptr, k);
+    threads.emplace_back(fptr, k);
 
-  for (unsigned k = 0; k < nu; k++)
-  {
-    threads[k]->join();
-    delete threads[k];
-  }
+  for (tbb::tbb_thread & t : threads)
+    t.join();
 #endif
 
   return RETURN_NO_FAULT;

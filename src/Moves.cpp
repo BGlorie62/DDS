@@ -97,11 +97,6 @@ Moves::Moves()
 }
 
 
-Moves::~Moves()
-{
-}
-
-
 void Moves::Init(
   const int tricks,
   const int relStartHand,

@@ -24,11 +24,6 @@ ABstats::ABstats()
 }
 
 
-ABstats::~ABstats()
-{
-}
-
-
 void ABstats::Reset()
 {
   for (int depth = 0; depth < DDS_MAXDEPTH; depth++)

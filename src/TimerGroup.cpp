@@ -22,11 +22,6 @@ TimerGroup::TimerGroup()
 }
 
 
-TimerGroup::~TimerGroup()
-{
-}
-
-
 void TimerGroup::Reset()
 {
   timers.resize(TIMER_DEPTH);
